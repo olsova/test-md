@@ -20,6 +20,5 @@ jobs:
 
       - name: Run plugin
         run: |
-          trivy image tomcat -f json --output plugin=md
-          cat trivy-report.md
+          trivy image tomcat:latest -f json --output plugin=md
           cat trivy-report.md >> $GITHUB_STEP_SUMMARY
