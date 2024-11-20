@@ -1,4 +1,4 @@
-name: Test
+name: Trivy scan
 on:
   push:
     branches:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   unittest:
-    name: Test
+    name: Trivy scan
     runs-on: ubuntu-22.04
     steps:
 
@@ -16,20 +16,10 @@ jobs:
       - name: Install plugin
         run: |
           trivy plugin install github.com/dramf/md
-          trivy plugin info md
 
-      - name: Run Trivy vulnerability scanner in repo mode
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'fs'
-          ignore-unfixed: true
-          format: 'json'
-          output: 'plugin=md'
-          skip-setup-trivy: true
+      - name: Run plugin
+        run: |
+            trivy image tomcat:9.0.54 -f json --output plugin=md
 
-#      - name: Run plugin
-#        run: |
-#            trivy image tomcat:9.0.54 -f json --output plugin=md
-
-      - name: Get report summary
+      - name: Get Summary
         run: cat trivy-report.md >> $GITHUB_STEP_SUMMARY
