@@ -19,7 +19,7 @@ jobs:
 
       - name: Run plugin
         run: |
-            trivy image tomcat:9.0.54 -f json --output plugin=md
+            trivy image alpine -f json --output plugin=md
 
       - name: Get Summary
         run: cat trivy-report.md >> $GITHUB_STEP_SUMMARY
