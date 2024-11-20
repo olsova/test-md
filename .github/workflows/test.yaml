@@ -27,7 +27,9 @@ jobs:
           output: 'plugin=md'
           skip-setup-trivy: true
 
-      - name: Run plugin
-        run: |
-            trivy image tomcat:9.0.54 -f json --output plugin=md
-            cat trivy-report.md >> $GITHUB_STEP_SUMMARY
+#      - name: Run plugin
+#        run: |
+#            trivy image tomcat:9.0.54 -f json --output plugin=md
+
+      - name: Get report summary
+        run: cat trivy-report.md >> $GITHUB_STEP_SUMMARY
